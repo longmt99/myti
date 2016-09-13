@@ -1,10 +1,11 @@
-package lcavedon.myti;
+package lcavedon.database;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +13,19 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import lcavedon.myti.DataException;
 import lcavedon.myti.JConstants.DATA;
+import lcavedon.myti.Journey;
+import lcavedon.myti.Pass;
+import lcavedon.myti.Price;
+import lcavedon.myti.Station;
+import lcavedon.myti.User;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 /**
  * Load data row from CVS file, 
@@ -26,28 +37,31 @@ public class DataFactory {
 	private static final String PATH = "data/";
 	private static final String TXT = ".txt";
 	
-	
-	public static User getUser(String userId) throws IOException, DataException  {
-		FileInputStream  in =null;
-		Properties properties = new Properties();
+	 private static SqlSessionFactory sqlSessionFactory;
+	 
+	    static {
+	        try {
+	 
+	            String resource = "lcavedon/database/config.xml";
+	            Reader reader = Resources.getResourceAsReader(resource);
+	 
+	            if (sqlSessionFactory == null) {
+	                sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+	            }
+	        }
+	        catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    
+	public static User getUser(String userId) throws IOException, DataException {
+		SqlSession session = sqlSessionFactory.openSession();
 		try {
-		   in = new FileInputStream(PATH + User.class.getSimpleName()+TXT);
-		
-			properties.load(in);
-		
-			String userData  = properties.getProperty(userId);
-			if(Utils.isEmpty(userData)){
-				return null;
-				//throw new DataException("InvalidUserIdException: "+userId );
-			}
-			User user = new User(StringUtils.split(userData,","));
-			user.setId(userId);
-			return user;
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		}finally{
-			in.close();
+			MytiMapper mapper = session.getMapper(MytiMapper.class);
+			return mapper.getUser(userId);
+		} finally {
+			session.close();
 		}
 	}
 	public static List<User> listUser() throws IOException {

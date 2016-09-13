@@ -5,16 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import junit.framework.TestCase;
-import lcavedon.myti.DataException;
-import lcavedon.myti.DataFactory;
-import lcavedon.myti.JConstants;
+import lcavedon.database.DataFactory;
 import lcavedon.myti.JConstants.OPTION;
 import lcavedon.myti.JConstants.TICKET_STATUS;
 import lcavedon.myti.JConstants.USER_TYPE;
-import lcavedon.myti.Pass;
-import lcavedon.myti.TicketManager;
-import lcavedon.myti.User;
-import lcavedon.myti.Utils;
 
 import org.junit.Test;
 

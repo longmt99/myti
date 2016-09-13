@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import lcavedon.database.DataFactory;
 import lcavedon.myti.JConstants.CARD;
 import lcavedon.myti.JConstants.OPTION;
 import lcavedon.myti.JConstants.TICKET_STATUS;
