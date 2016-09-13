@@ -1,1 +1,11 @@
-#id, passId, startTime, endTime,depart,arrive
+CREATE DATABASE `myti` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE TABLE `tb_user` (
+  `user_number` int(11) NOT NULL AUTO_INCREMENT,
+  `id` char(20) NOT NULL,
+  `credit` decimal(6,2) DEFAULT '0.00',
+  `type` char(20) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `purchase_count` int(5) DEFAULT '0',
+  PRIMARY KEY (`user_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
