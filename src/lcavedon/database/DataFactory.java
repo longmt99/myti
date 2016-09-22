@@ -41,7 +41,7 @@ public class DataFactory {
 	 
 	    static {
 	        try {
-	 
+	  
 	            String resource = "lcavedon/database/config.xml";
 	            Reader reader = Resources.getResourceAsReader(resource);
 	 
