@@ -3,16 +3,14 @@ package lcavedon.gui;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -136,6 +134,24 @@ public class MainController  extends Application{
 		timeId.setText(now.substring(8));
 		*/
 		output.setText("Add a pass and add journey..." + "\nConfig Path \n   INPUT:    ["+ inputPath+ "] \n   OUTPUT: ["+outputPath+"]");
+		lengthId.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		        try {
+		        	if(newValue.equals(JConstants.PERIOD.ALL_DAY)){
+		        		timeId.setText("");
+		        		timeId.setDisable(true);
+		        	}else{
+		        		timeId.setPromptText("Time: ex) 1400");
+		        		timeId.setDisable(false);
+		        	}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+		});
 		
 	}
 

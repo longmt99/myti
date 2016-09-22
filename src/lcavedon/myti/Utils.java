@@ -18,10 +18,9 @@ import java.util.Locale;
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
-import lcavedon.fileio.DataFactory;
+import javafx.scene.control.ButtonType;
 import lcavedon.myti.JConstants.OPTION;
 import lcavedon.myti.JConstants.USER_TYPE;
 
