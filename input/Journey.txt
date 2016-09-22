@@ -1,3 +1,11 @@
 #id, passId, startTime, endTime,depart,arrive
-#Wed Sep 21 18:47:06 KST 2016
-lc2184702=lc2_09,210920160000,Central,Richmond,
+#Thu Sep 22 17:18:12 KST 2016
+163913=lc_29,220920160000,Central,Central,
+164006=lc2_11,220920160000,Central,Central,
+164506=lc_29,220920160000,Richmond,Richmond,
+171808=lc_29,220920160000,Central,Central,
+171407=lc_29,220920160000,Central,Central,
+163952=lc_29,220920160000,Central,Central,
+164016=tttt_01,220920160000,Central,Central,
+163948=lc_29,220920160000,Central,Central,
+164011=lc2_11,220920160000,Central,Central,

@@ -23,7 +23,7 @@ public class JConstants {
 	}
 	public interface PERIOD {
 		public static final String HOURS = "2 Hours";
-		public static final String ALL_DAY = "All day";
+		public static final String ALL_DAY = "All Day";
 	}
 	public interface ZONE {
 		public static final String Z1 = "Zone 1";

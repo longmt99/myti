@@ -91,7 +91,7 @@ public class Utils {
 		
 	}
 	public static String buildJourneyId(String userId) throws DataException {
-		return userId+toDateString(new Date(), JConstants.HHmmss);
+		return toDateString(new Date(), JConstants.HHmmss);
 	}
 	public static void replateFile(String inFile, String outFile) throws FileNotFoundException, IOException {
 		InputStream in = new FileInputStream(new File(inFile));
@@ -200,7 +200,7 @@ public class Utils {
 	public static String getWeekday(String startTime) throws DataException {
 		Date date = toDate(startTime,JConstants.ddMMyyyyHHmm);
 		Calendar calendar = Calendar.getInstance();
-		SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+		SimpleDateFormat dayFormat = new SimpleDateFormat("EEE", Locale.US);
 		calendar.setTime(date);
 		
 		String weekDay = dayFormat.format(calendar.getTime());

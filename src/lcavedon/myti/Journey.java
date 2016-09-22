@@ -5,14 +5,13 @@ package lcavedon.myti;
  * Journey bean
  */
 public class Journey {
-	
 	private String id;
 	private String passId;
-	//private int depart;
-	//private int arrive;
+	private String userId;
 	private String departName;
 	private String arriveName;
 	private String startTime;
+	private String purchased;
 	private User user;
 	private boolean newPass;
 	private Pass pass;
@@ -21,7 +20,8 @@ public class Journey {
 	public Journey(String[] split) {
 		this.passId = split[0];
 		this.startTime = split[1];
-		
+		this.departName = split[2];
+		this.arriveName = split[3];
 	}
 	public Journey() {
 	}
@@ -32,8 +32,9 @@ public class Journey {
 	
 	public String toString() {
 		String zone_ = this.pass.getZoneName();		
-		return "ID: "+ this.id +" for ["+ zone_ +"]"+" starting at ["+ this.startTime+"] "   
-				+ " From station ["+this.departName+"] to [" + this.arriveName+"]"   ;
+		return "Journey ID: "+ this.id +" for ["+ zone_ +"]"+" starting at ["+ this.startTime+"] "   
+				+ "\nFrom station ["+this.departName+"] to [" + this.arriveName+"]"   
+		+ "\n in travel pass"+this.pass ;
 	}
 	public Journey(User user) {
 		this.user =user;
@@ -91,6 +92,18 @@ public class Journey {
 	public void setPass(Pass pass) {
 		this.pass = pass;
 		setPassId(pass.getId());
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getPurchased() {
+		return purchased;
+	}
+	public void setPurchased(String purchased) {
+		this.purchased = purchased;
 	}
 	
 }

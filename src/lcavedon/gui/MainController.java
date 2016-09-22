@@ -105,18 +105,45 @@ public class MainController  extends Application{
 		//stage.get
 		stage.setTitle("My Ticket A02");
 		stage.show();
+		//showTravelPassUIAction();
+		
 	}
 	
 	@FXML
 	private void initialize() throws IOException, DataException {
+		//new TravelControl(this);
+		System.out.println("Init System Data MyTi GUI");
+		ObservableList<String> items =FXCollections.observableArrayList ();
+		List<User> users = new DataFactory(inputPath,outputPath).listUser();
+		for (User user : users) {
+			items.add(user.getId());
+		}
+		cardId.setItems(items);
+		
+		// Create a collection of stations, priceList for the system
+		stationList = new DataFactory(inputPath,outputPath).listStation();
+		priceList = new DataFactory(inputPath,outputPath).listPrice();
+		
+		// Set default
+		/*
+		cardId.getSelectionModel().selectFirst();
+		lengthId.getSelectionModel().selectFirst();
+		zoneId.getSelectionModel().selectFirst();
+		departId.getSelectionModel().selectFirst();
+		arriveId.getSelectionModel().selectFirst();
+		dateId.setValue(LocalDate.now());
+		String now = Utils.toDateString(Utils.addHour(1, new Date()), JConstants.ddMMyyyyHHmm);
+		timeId.setText(now.substring(8));
+		*/
+		output.setText("Add a pass and add journey..." + "\nConfig Path \n   INPUT:    ["+ inputPath+ "] \n   OUTPUT: ["+outputPath+"]");
 		
 	}
 
+	
 	@FXML
 	private void purchasePass() {
 		try {
 			userId = cardId.getSelectionModel().getSelectedItem();		
-			user = new DataFactory(inputPath,outputPath).getUser(userId );
 			
 			String length = lengthId.getSelectionModel().getSelectedItem();
 			String zone = zoneId.getSelectionModel().getSelectedItem();
@@ -133,6 +160,8 @@ public class MainController  extends Application{
 			Pass pass = new Pass(length, zone, user);
 			pass.setStartTime(startTime);
 			pass.setStatus(TICKET_STATUS.CHARGED);
+			
+			user = new DataFactory(inputPath,outputPath).getUser(userId );
 			processTravelPass(pass);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,24 +171,28 @@ public class MainController  extends Application{
 	}
 
 	@FXML
-	private void showTravelPassUIAction(ActionEvent event) {
+	private void showAllJourneyAction() {
 		try {
-			FXMLLoader loader = new FXMLLoader();
-			InputStream fxmlDocPath = this.getClass().getResourceAsStream("main.fxml");
-			SplitPane root = (SplitPane) loader.load(fxmlDocPath);
-			stage.setFullScreen(false);
-			stage.setResizable(false);
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			//stage.get
-			stage.setTitle("My Ticket A02");
-			stage.show();
+			mainPane.getChildren().clear();
+			ReportControl control =  new ReportControl(this);
+			mainPane.getChildren().add(control);
 		} catch (Exception e) {
 			e.printStackTrace();
 			output.setText(Utils.showErrorDialog(e.getMessage()));
 		}
 	}
 	
+	@FXML
+	private void showTravelPassUIAction() {
+		try {
+			mainPane.getChildren().clear();
+			TravelControl control =  new TravelControl(this);
+			mainPane.getChildren().add(control);
+		} catch (Exception e) {
+			e.printStackTrace();
+			output.setText(Utils.showErrorDialog(e.getMessage()));
+		}
+	}
 	
 	@FXML
 	private void showCardUserUI(ActionEvent event) {
@@ -193,7 +226,7 @@ public class MainController  extends Application{
 	private void saveAction(ActionEvent event) {
 		try{
 			new DataFactory(inputPath, outputPath).replateFile();
-			output.setText(Utils.showInformationDialog("Save Data Action output path: ["+ outputPath+"]"));
+			output.setText(Utils.showInformationDialog("Saved your data at output path: ["+ outputPath+"] \n Travel pass, Journey and User."));
 		} catch (Exception e) {
 			e.printStackTrace();
 			output.setText(Utils.showErrorDialog(e.getMessage()));
@@ -467,58 +500,7 @@ public class MainController  extends Application{
 				+ user.getId() + "], Pass Id: " + pass+ "\nYour remaining credit is: $" + user.getCredit());
 		return pass;
 	}
-	@FXML
-	public void showAllJourneyAction() throws IOException, DataException {
-		System.out.println("\n  All Journeys made using MyTi cards:");
-		
-		// List all MyTi cards
-		List<User> userList = new DataFactory(inputPath,outputPath).listUser();
-		
-		for (User user : userList ) {
-			String userId= user.getId();
-			// List list Pass By MyTi cards ID - user ID
-			System.out.printf("MyTi Card:" + userId);
-			List<Pass> passList = new DataFactory(inputPath,outputPath).listPassByUser(userId);
-			// HOUR_2 travel passes can buy multiple journey, this Map have key is pass ID 
-			int count=0;
-			for (Pass pass : passList) {
-				++count;
-				System.out.printf("\n"+ count+ "."+pass.getLengthName() +" " +  "  Travel Pass purchased on " + Utils.getWeekday(pass.getStartTime()));
-				String passId = pass.getId();
-				List<Journey> journeyList = new DataFactory(inputPath,outputPath).listJourneyByPassId(passId);
-				System.out.println("\n     Journeys on this pass:");
-				int index =0;
-				for (Journey journey  : journeyList) {
-					index++;
-					System.out.printf("         + "+index+". From %8s to  %8s start at %10s\n",journey.getDepartName(),journey.getArriveName(),journey.getStartTime());
-				}
-			}
-		}
-		
-	}
-	@FXML
-	public void showStationStatistics() throws IOException {
-		System.out.println("\n Station travel statistics:");
-		Map<String,Station> stationShow = new HashMap<String, Station>() ;
-		
-		List<Station> stationList = new DataFactory(inputPath,outputPath).listStation();
-		for (Station station : stationList) {
-			stationShow.put(station.getName(), station);
-		}
-		List<Journey> journeyList = new DataFactory(inputPath,outputPath).listJourney();
-		for (Journey journey : journeyList) {
-			String depart = journey.getDepartName();
-			String arrive = journey.getArriveName();
-			stationShow.get(depart).departCount++;
-			stationShow.get(arrive).arriveCount++;
-		}
-		 Set<String> keys = stationShow.keySet();
-		 for (String key : keys) {
-			 Station station = stationShow.get(key);
-			 //Central: 1 journeys started here, 0 journeys ended here
-			System.out.printf(" %14s : %3s journeys started here, %3s journeys ended here\n",""+ station.getName(),station.departCount,station.arriveCount);
-		}
-	}
+	
 	public static String buildTravelPassId(String userId) throws IOException, DataException {	
 		User user = new DataFactory(inputPath,outputPath).getUser(userId);
 		int uniqueId = user.getUniqueId();

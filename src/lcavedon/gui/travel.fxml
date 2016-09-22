@@ -99,14 +99,14 @@
                   <HBox alignment="CENTER" prefHeight="67.0" prefWidth="598.0" spacing="20.0">
                      <children>
                         <Label text="Date &amp; Time" />
-                        <DatePicker fx:id="dateId" prefHeight="23.0" prefWidth="173.0" promptText="Day:" />
-                        <TextField fx:id="timeId" prefHeight="23.0" prefWidth="108.0" promptText="Time: ex) 1400" />
+                        <DatePicker fx:id="dateId" editable="false" prefHeight="23.0" prefWidth="147.0" promptText="Day:" />
+                        <TextField fx:id="timeId" prefHeight="23.0" prefWidth="102.0" promptText="Time: ex) 1400" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="112.0" prefWidth="598.0" spacing="20.0">
                      <children>
                         <Button fx:id="purchaseJourneyId" mnemonicParsing="false" onAction="#purchaseJourney" prefHeight="35.0" prefWidth="88.0" text="Add Journey" />
-                        <TextArea fx:id="output" prefHeight="108.0" prefWidth="307.0" text="Add a pass and add journey..." wrapText="true" />
+                        <TextArea fx:id="output" editable="false" prefHeight="108.0" prefWidth="307.0" text="Add a pass and add journey..." wrapText="true" />
                         <Button fx:id="purchasePassId" mnemonicParsing="false" onAction="#purchasePass" prefHeight="36.0" prefWidth="78.0" text="Buy Pass" />
                      </children></HBox>
                </children>

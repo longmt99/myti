@@ -127,7 +127,7 @@ public class UserControl extends AnchorPane {
 			String userName = userNameTxt.getText();
 			String email = emailTxt.getText();
 			if(Utils.isEmpty(userId)  || Utils.isEmpty(userName) || Utils.isEmpty(email)){
-				userOutputTxt.setText(Utils.showErrorDialog("Data input can not not empty"));
+				userOutputTxt.setText(Utils.showErrorDialog("Data input can not not empty: userId, Name, email."));
 				return;
 			}
 			user = new DataFactory(inputPath,outputPath).getUser(userId);

@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -87,7 +89,7 @@ public class TravelControl  extends VBox{
 	
 	public TravelControl(MainController mainController) {
 		this.mainController = mainController;
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("user.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("travel.fxml"));
 		fxmlLoader.setRoot(this);
 		fxmlLoader.setController(this);
 		this.inputPath = mainController.inputPath;
@@ -113,6 +115,7 @@ public class TravelControl  extends VBox{
 		priceList = new DataFactory(inputPath,outputPath).listPrice();
 		
 		// Set default
+		/*
 		cardId.getSelectionModel().selectFirst();
 		lengthId.getSelectionModel().selectFirst();
 		zoneId.getSelectionModel().selectFirst();
@@ -121,8 +124,27 @@ public class TravelControl  extends VBox{
 		dateId.setValue(LocalDate.now());
 		String now = Utils.toDateString(Utils.addHour(1, new Date()), JConstants.ddMMyyyyHHmm);
 		timeId.setText(now.substring(8));
+		*/
 		
-		output.setText("Add a pass and add journey..." + "\n Config Path input: ["+ inputPath+ "] and  Output: ["+outputPath+"]");
+		output.setText("Add a pass and add journey..." + "\nConfig Path \n   INPUT: ["+ inputPath+ "] \n   OUTPUT: ["+outputPath+"]");
+		lengthId.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		        try {
+		        	if(newValue.equals(JConstants.PERIOD.ALL_DAY)){
+		        		timeId.setText("");
+		        		timeId.setDisable(true);
+		        	}else{
+		        		timeId.setPromptText("Time: ex) 1400");
+		        		timeId.setDisable(false);
+		        	}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+		});
 	}
 
 	@FXML
@@ -134,12 +156,25 @@ public class TravelControl  extends VBox{
 			String length = lengthId.getSelectionModel().getSelectedItem();
 			String zone = zoneId.getSelectionModel().getSelectedItem();
 			
-			String inputTime ="0000";
-			 DateTimeFormatter format = DateTimeFormatter.ofPattern(JConstants.ddMMyyyy);
+			String inputTime = timeId.getText();
+			DateTimeFormatter format = DateTimeFormatter.ofPattern(JConstants.ddMMyyyy);
 			String inputDate = format.format(dateId.getValue()); 
+			
+			if(Utils.isEmpty(userId)  || Utils.isEmpty(length) || Utils.isEmpty(zone) || Utils.isEmpty(inputDate)){
+				output.setText(Utils.showErrorDialog("Data input can not not empty: length, zone, userId "));
+				return;
+			}
+			if(length.equals(JConstants.PERIOD.HOURS)){
+				if(Utils.isEmpty(inputTime) || inputTime.length()!=4){
+					output.setText(Utils.showErrorDialog("Data input is invalid format"));
+					return;
+				}
+			}else{
+				inputTime =  "0000";
+			}
 			Date date = Utils.toDate(inputDate+"_235959", JConstants.ddMMyyyy_HHmmss);
 			if (date.before(new Date()) || inputDate.length() !=8) {
-				output.setText("Input Date " +inputDate +" is invalid");
+				output.setText(Utils.showErrorDialog("Input Date " +inputDate +" is invalid"));
 				return;
 			}
 			String startTime = inputDate + inputTime;
@@ -263,7 +298,7 @@ public class TravelControl  extends VBox{
 						journey.setPass(myPass);
 						updatedPassSucces =true;
 						
-						output.setText(Utils.showInformationDialog("Great. Updated Travel pass to All day. This is cheaper" + myPass));
+						output.setText(Utils.showInformationDialog("Great. Updated Travel pass to All day.\nThis is cheaper" + myPass));
 						
 						break;
 					}else if(is2Hours && isCoverTime){
@@ -290,7 +325,7 @@ public class TravelControl  extends VBox{
 			}
 	
 		new DataFactory(inputPath,outputPath).storeJourney(journey);
-		output.setText("Your journey ["+journey.getId()+"] is for ["+journey.getPass().getZoneName()+"] " + " starting at " + journey.getStartTime()+". \n Enjoy your travel!");
+		output.setText("Your journey ["+journey.getId()+"] is for ["+journey.getPass().getZoneName()+"] " + "\nStarting at " + journey.getStartTime()+". \nEnjoy your travel!");
 	}
 	
 	/**
@@ -353,7 +388,7 @@ public class TravelControl  extends VBox{
 						output.setText(Utils.showInformationDialog("Great. Updated Travel pass to All day. This is cheaper" + myPass));		
 						return myPass.getId();
 					}else if(isAllDay && isCoverDate){
-						output.setText(Utils.showInformationDialog("Your Travel pass already purchased All day. \n No need purchase more, Just use it: " + myPass));
+						output.setText(Utils.showInformationDialog("Your Travel pass already purchased All day.\nNo need purchase more, Just use it: " + myPass));
 						return myPass.getId();
 					}
 				}

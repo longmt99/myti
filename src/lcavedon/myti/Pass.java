@@ -72,18 +72,18 @@ public class Pass {
 		String length_ = this.length.equals(OPTION.HOUR_2) ? PERIOD.HOURS : PERIOD.ALL_DAY;
 		String zone_ = this.zone.equals(OPTION.HOUR_2) ? ZONE.Z1 : ZONE.Z2;		
 		
-		String content = "ID: "+ this.id +" In period "+ " ["+ length_+"] "	;
+		String content = "ID: "+ this.id +" "+ " ["+ length_+"] "	;
 		if(length.equals(OPTION.HOUR_2)){
 			content += " Start time: " + this.startTime;
 		}else{
 			content += " Time of purchase: " + this.startTime.substring(0,8);
 		}
-		String priceString = " at ["+zone_+"] price $"+ this.price+" ";
+		String priceString = "\nAt ["+zone_+"] price $"+ this.price+" ";
 		if(price==0d){
-			priceString = " just FREE for senior MyTi on every Sunday ";
+			priceString = "\nJust FREE for senior MyTi on every Sunday ";
 		}
 		content +=priceString;
-		return "\n"+ content;
+		return content;
 	}
 	/**
 	 * Check is Cover Date '301120161300' cover  '30112016'

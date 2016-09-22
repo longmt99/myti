@@ -1,10 +1,12 @@
 #id, user_number, credit, type, name, email, purchase_count
-#Wed Sep 21 20:23:23 KST 2016
-lc2=0,71.43,Junior,lc3,mal,9,10,
-lc1=0,35.67,Senior,lc2,mal,5,5,
-tttsd=0,5.0,Adult,dfdfdf,dfdfdf,100,0,
+#Thu Sep 22 18:00:07 KST 2016
+lc=1,32.96,Adult,Lawrence Cavedon,lawrence@cavedon.com,46,29,
+tetdg=0,5.0,Senior,gddd,ddddd,100,0,
+tttsd=0,10.0,Adult,dfdfdf,dfdfdf,100,0,
+tttt=0,23.25,Senior,d dd,tetet,101,1,
+test=0,10.0,Adult,tess,t\u00EAst,100,0,
 ffff=0,5.0,Adult,ffff,fffff,100,0,
-lc=1,43.37,Adult,Lawrence Cavedon,lawrence@cavedon.com,44,27,
-tttt=0,25.0,Senior,d dd,tetet ,100,0,
+lc2=0,74.68,Junior,lc3,mal,10,11,
+lc1=0,35.67,Senior,lc2,mal,5,5,
+656=0,0.0,Adult,5656,56565,100,0,
 yyrrrr=0,5.0,Adult,rrrr,rrrrr,100,0,
-test=0,5.0,Adult,tess,t\u00EAst,100,0,

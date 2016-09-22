@@ -38,6 +38,18 @@ public class Station {
 	}
 	public String buildSelection() {
 		return name;
+	}
+	public int getDepartCount() {
+		return departCount;
+	}
+	public void setDepartCount(int departCount) {
+		this.departCount = departCount;
+	}
+	public int getArriveCount() {
+		return arriveCount;
+	}
+	public void setArriveCount(int arriveCount) {
+		this.arriveCount = arriveCount;
 	} 
 	
 }
