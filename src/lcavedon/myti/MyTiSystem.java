@@ -5,9 +5,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Scanner;
 
-import lcavedon.database.DataFactory;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import lcavedon.fileio.DataFactory;
 import lcavedon.myti.JConstants.CARD;
 import lcavedon.myti.JConstants.OPTION;
 import lcavedon.myti.JConstants.TICKET_STATUS;
@@ -279,13 +284,25 @@ public class MyTiSystem {
 		return length;
 	}
 
-	public static String inputYesNo(){
-		System.out.println("\n Confirm YES or NO:");
-		System.out.println(OPTION.A + ". YES");
-		System.out.println(OPTION.B + ". NO");
-		System.out.println("Your selection: ");
-		String length = input.next();// OPTION.B;// OPTION.A;//
-		return length;
+	public static String inputYesNo(String header){
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog YES - NO");
+		alert.setHeaderText(header);
+		alert.setContentText("Choose your option.");
+
+		ButtonType yes = new ButtonType("YES");
+		ButtonType no = new ButtonType("NO", ButtonData.CANCEL_CLOSE);
+
+		alert.getButtonTypes().setAll(yes, no);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == yes){
+			return OPTION.A;
+		}else{
+			return OPTION.B;
+		}
+		
 	}
 	
 	

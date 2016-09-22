@@ -1,11 +1,11 @@
-CREATE DATABASE `myti` /*!40100 DEFAULT CHARACTER SET utf8 */;
-CREATE TABLE `tb_user` (
-  `user_number` int(11) NOT NULL AUTO_INCREMENT,
-  `id` char(20) NOT NULL,
-  `credit` decimal(6,2) DEFAULT '0.00',
-  `type` char(20) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `purchase_count` int(5) DEFAULT '0',
-  PRIMARY KEY (`user_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+#id, passId, startTime, endTime,depart,arrive
+#Wed Sep 21 17:52:46 KST 2016
+lc2172331=lc2_04,170920160000,Central,Central,
+lc2172358=lc2_04,170920160000,Central,Central,
+lc2175017=lc2_06,210920160000,Central,Central,
+lc2174603=lc2_05,210920160000,Central,Central,
+lc2175226=lc2_06,210920160000,Central,Central,
+lc2172221=lc2_04,170920160000,Central,Central,
+lc2175145=lc2_06,210920160000,Central,Central,
+lc2171826=lc2_04,170920160000,Central,Central,
+lc2203437=lc2_05,200920160000,Central,Central,

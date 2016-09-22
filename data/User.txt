@@ -1,5 +1,7 @@
 #id, user_number, credit, type, name, email, purchase_count
-#Sun Sep 11 14:02:21 AEST 2016
-lc2=0,45.5,Junior,lc3,mal,2,2,
-lc1=0,35.0,Senior,lc2,mal,4,4,
-lc=1,50.27,Adult,Lawrence Cavedon,lawrence@cavedon.com,43,26,
+#Wed Sep 21 17:52:11 KST 2016
+lc2=0,65.01,Junior,lc3,mal,6,6,
+lc1=0,30.67,Senior,lc2,mal,5,5,
+tttsd=0,5.0,Adult,dfdfdf,dfdfdf,100,0,
+lc=1,43.37,Adult,Lawrence Cavedon,lawrence@cavedon.com,44,27,
+test=0,5.0,Adult,tess,t\u00EAst,100,0,

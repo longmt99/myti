@@ -41,10 +41,10 @@ public class Pass {
 		this.userId = journey.getUser().getId();
 	}
 	public boolean isHours(){
-		return JConstants.OPTION.A.equals(length);
+		return JConstants.OPTION.HOUR_2.equals(length);
 	}
 	public boolean isAllDay(){
-		return JConstants.OPTION.B.equals(length);
+		return JConstants.OPTION.ALL_DAY.equals(length);
 	}
 	
 	/**
@@ -62,18 +62,18 @@ public class Pass {
 				+ this.status +","+ this.startTime+",";
 	}
 	public String getZoneName() {
-		return this.zone.equals(OPTION.A) ? ZONE.Z1 : ZONE.Z2;
+		return this.zone.equals(OPTION.HOUR_2) ? ZONE.Z1 : ZONE.Z2;
 	}
 	public String getLengthName() {
-		return this.length.equals(OPTION.A) ? PERIOD.HOURS : PERIOD.ALL_DAY;
+		return this.length.equals(OPTION.HOUR_2) ? PERIOD.HOURS : PERIOD.ALL_DAY;
 	}
 	
 	public String toString() {
-		String length_ = this.length.equals(OPTION.A) ? PERIOD.HOURS : PERIOD.ALL_DAY;
-		String zone_ = this.zone.equals(OPTION.A) ? ZONE.Z1 : ZONE.Z2;		
+		String length_ = this.length.equals(OPTION.HOUR_2) ? PERIOD.HOURS : PERIOD.ALL_DAY;
+		String zone_ = this.zone.equals(OPTION.HOUR_2) ? ZONE.Z1 : ZONE.Z2;		
 		
 		String content = "ID: "+ this.id +" In period "+ " ["+ length_+"] "	;
-		if(length.equals(OPTION.A)){
+		if(length.equals(OPTION.HOUR_2)){
 			content += " Start time: " + this.startTime;
 		}else{
 			content += " Time of purchase: " + this.startTime.substring(0,8);
@@ -83,7 +83,7 @@ public class Pass {
 			priceString = " just FREE for senior MyTi on every Sunday ";
 		}
 		content +=priceString;
-		return content;
+		return "\n"+ content;
 	}
 	/**
 	 * Check is Cover Date '301120161300' cover  '30112016'
@@ -112,7 +112,7 @@ public class Pass {
 	 * @return
 	 */
 	public boolean isCoverZone(String departZone,String arriveZone){
-		return zone.equals(JConstants.OPTION.B) || (zone.equals(departZone)&&zone.equals(arriveZone));
+		return zone.equals(JConstants.OPTION.ALL_DAY) || (zone.equals(departZone)&&zone.equals(arriveZone));
 	}
 	public String getLength() {
 		return length;

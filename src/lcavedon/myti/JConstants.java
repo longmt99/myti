@@ -16,10 +16,10 @@ public class JConstants {
 		public static final String SENIOR = "Senior";
 	}
 	public interface OPTION {
-		public static final String A = "a";
-		public static final String B = "b";
-		public static final String C = "c";
-		public static final String X = "x";
+		public static final String HOUR_2 = "2 Hour";
+		public static final String ALL_DAY = "All Day";
+		public static final String YES = "YES";
+		public static final String NO = "NO";
 	}
 	public interface PERIOD {
 		public static final String HOURS = "2 Hours";
@@ -39,8 +39,8 @@ public class JConstants {
 		public static final String FREE = "free";
 	}
 	public interface DATA {
-		public static final String STATION = "data/STATION.csv";
-		public static final String PRICE = "data/PRICE.csv";
+		public static final String STATION = "STATION.csv";
+		public static final String PRICE = "PRICE.csv";
 	}
 	
 	public static final String ddMMyyyy_HHmmss = "ddMMyyyy_HHmmss";

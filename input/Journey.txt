@@ -1,0 +1,3 @@
+#id, passId, startTime, endTime,depart,arrive
+#Wed Sep 21 18:47:06 KST 2016
+lc2184702=lc2_09,210920160000,Central,Richmond,

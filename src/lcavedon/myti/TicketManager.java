@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import lcavedon.database.DataFactory;
+import lcavedon.fileio.DataFactory;
 import lcavedon.myti.JConstants.OPTION;
 import lcavedon.myti.JConstants.TICKET_STATUS;
 
@@ -277,13 +277,13 @@ public class TicketManager {
 	
 	/**
 	 * Process purchase, store ticket, deduce credit of user if
-	 * (length.equals(OPTION.A) && zones.equals(OPTION.A)) { // CODE HERE:
+	 * (length.equals(OPTION.HOUR_2) && zones.equals(OPTION.HOUR_2)) { // CODE HERE:
 	 * purchase a 2 Hour Zone 1 Travel Pass on this MyKi card; } else if
-	 * (length.equals(OPTION.A) && zones.equals(OPTION.B)) { // CODE HERE:
+	 * (length.equals(OPTION.HOUR_2) && zones.equals(OPTION.ALL_DAY)) { // CODE HERE:
 	 * purchase a 2 Hour Zone 2 Travel Pass on this MyKi card; } else if
-	 * (length.equals(OPTION.B) && zones.equals(OPTION.A)) { // CODE HERE:
+	 * (length.equals(OPTION.ALL_DAY) && zones.equals(OPTION.HOUR_2)) { // CODE HERE:
 	 * purchase an All Day Zone 1 Travel Pass on this MyKi card; } else if
-	 * (length.equals(OPTION.B) && zones.equals(OPTION.B)) { // CODE HERE:
+	 * (length.equals(OPTION.ALL_DAY) && zones.equals(OPTION.ALL_DAY)) { // CODE HERE:
 	 * purchase an All Day Zone 2 Travel Pass on this MyKi card; }
 	 * 
 	 * @param length
@@ -312,7 +312,7 @@ public class TicketManager {
 			throw new DataException("Not Enough Funds Exception " +credit);
 		}
 		// Process purchase Travel Pass
-		// A travel passes can buy multiple journey, this Map have key is pass ID 
+		// HOUR_2 travel passes can buy multiple journey, this Map have key is pass ID 
 		pass.setId(Utils.buildTravelPassId(userId));
 		pass.setPrice(price);
 		pass.setUserId(userId);
@@ -339,7 +339,7 @@ public class TicketManager {
 			// List list Pass By MyTi cards ID - user ID
 			System.out.printf("MyTi Card:" + userId);
 			List<Pass> passList = DataFactory.listPassByUser(userId);
-			// A travel passes can buy multiple journey, this Map have key is pass ID 
+			// HOUR_2 travel passes can buy multiple journey, this Map have key is pass ID 
 			int count=0;
 			for (Pass pass : passList) {
 				++count;
