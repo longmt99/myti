@@ -122,7 +122,7 @@ public class TravelControl  extends VBox{
 		    @Override
 		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 		        try {
-		        	if(newValue.equals(JConstants.PERIOD.ALL_DAY)){
+		        	if(newValue.equals(JConstants.OPTION.ALL_DAY)){
 		        		timeId.setText("");
 		        		timeId.setDisable(true);
 		        	}else{
@@ -141,20 +141,20 @@ public class TravelControl  extends VBox{
 	private void purchasePass() {
 		try {
 			userId = cardId.getSelectionModel().getSelectedItem();		
-			user = new DataFactory(inputPath,outputPath).getUser(userId );
+			
 			
 			String length = lengthId.getSelectionModel().getSelectedItem();
 			String zone = zoneId.getSelectionModel().getSelectedItem();
 			
 			String inputTime = timeId.getText();
 			DateTimeFormatter format = DateTimeFormatter.ofPattern(JConstants.ddMMyyyy);
-			String inputDate = format.format(dateId.getValue()); 
 			
-			if(Utils.isEmpty(userId)  || Utils.isEmpty(length) || Utils.isEmpty(zone) || Utils.isEmpty(inputDate)){
-				output.setText(Utils.showErrorDialog("Data input can not not empty: length, zone, userId "));
+			
+			if(Utils.isEmpty(userId)  || Utils.isEmpty(length) || Utils.isEmpty(zone) || Utils.isEmpty(dateId.getValue())){
+				output.setText(Utils.showErrorDialog("Data input can't empty: length, zone, userId, date "));
 				return;
 			}
-			if(length.equals(JConstants.PERIOD.HOURS)){
+			if(length.equals(JConstants.OPTION.HOUR_2)){
 				if(Utils.isEmpty(inputTime) || inputTime.length()!=4){
 					output.setText(Utils.showErrorDialog("Data input is invalid format"));
 					return;
@@ -162,8 +162,10 @@ public class TravelControl  extends VBox{
 			}else{
 				inputTime =  "0000";
 			}
+			user = new DataFactory(inputPath,outputPath).getUser(userId );
+			String inputDate = format.format(dateId.getValue()); 
 			Date date = Utils.toDate(inputDate+"_235959", JConstants.ddMMyyyy_HHmmss);
-			if (date.before(new Date()) || inputDate.length() !=8) {
+			if (date.before(new Date())) {
 				output.setText(Utils.showErrorDialog("Input Date " +inputDate +" is invalid"));
 				return;
 			}
@@ -185,18 +187,29 @@ public class TravelControl  extends VBox{
 	private void purchaseJourney() {
 		try {
 			userId = cardId.getSelectionModel().getSelectedItem();		
+			String arrive =  arriveId.getSelectionModel().getSelectedItem();
+			String depart =  departId.getSelectionModel().getSelectedItem();
+			String inputTime = timeId.getText();
+			if(Utils.isEmpty(userId) || Utils.isEmpty(arrive) || Utils.isEmpty(depart) || Utils.isEmpty(dateId.getValue())
+					||Utils.isEmpty(inputTime)){
+				output.setText(Utils.showErrorDialog("Data input can't empty: arrive, depart, userId, date, time "));
+				return;
+			}
+			
+			if(depart.equals(arrive)){
+				output.setText(Utils.showErrorDialog("Station depart or arrive is invalid"));
+				return; 
+			}
+			
 			user = new DataFactory(inputPath,outputPath).getUser(userId );
 			Journey journey = new Journey(user);
 			
-			String arrive =  arriveId.getSelectionModel().getSelectedItem();
-			String depart =  departId.getSelectionModel().getSelectedItem();
 			
-			String inputTime ="0000";
 			 DateTimeFormatter format = DateTimeFormatter.ofPattern(JConstants.ddMMyyyy);
 			String inputDate = format.format(dateId.getValue()); 
 			Date date = Utils.toDate(inputDate+"_235959", JConstants.ddMMyyyy_HHmmss);
-			if (date.before(new Date()) || inputDate.length() !=8) {
-				output.setText(Utils.showErrorDialog("Input Date " +inputDate +" is invalid"));
+			if (date.before(new Date())|| inputTime.length() !=4) {
+				output.setText(Utils.showErrorDialog("Input DateTime " +inputDate +" "+ inputTime+ " is invalid"));
 				return;
 			}
 			String startTime = inputDate + inputTime;

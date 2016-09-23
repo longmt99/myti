@@ -201,7 +201,7 @@ public class UserControl extends AnchorPane {
 		if(Utils.isNotEmpty(userId)){
 			userId = cardId.getSelectionModel().getSelectedItem();	
 			user = new DataFactory(inputPath,outputPath).getUser(userId);
-			creditForLbl.setText("Credit for ["+ user.getId() + "] is [$"+user.getCredit()+"]");
+			creditForLbl.setText("Credit for ["+ user.getId() + "] is $"+user.getCredit()+"");
 		}	
 	}
 	    

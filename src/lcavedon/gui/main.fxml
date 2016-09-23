@@ -6,114 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.collections.*?>
+<?import java.net.*?>
 
-<SplitPane dividerPositions="0.8200455580865603" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="441.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lcavedon.gui.MainController">
+<SplitPane dividerPositions="0.8200455580865603" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="441.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+ fx:controller="lcavedon.gui.MainController"  stylesheets="@main.css" styleClass="root">
   <items>
     <AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-         <children>
-            <VBox layoutY="-3.0" prefHeight="364.0" prefWidth="598.0">
-               <children>
-                  <Label prefHeight="43.0" prefWidth="555.0" text="Select your information ticket">
-                     <VBox.margin>
-                        <Insets left="20.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <HBox prefHeight="171.0" prefWidth="598.0" spacing="10.0">
-                     <children>
-                        <VBox prefHeight="150.0" prefWidth="219.0" spacing="5.0">
-                           <children>
-                              <Label prefHeight="12.0" prefWidth="146.0" text="FROM:">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin></Label>
-                              <ListView id="from" fx:id="departId" prefHeight="151.0" prefWidth="146.0">
-                                 <items>
-                                 	<FXCollections fx:factory="observableArrayList">
-         			                    <String fx:value="Central" />
-         			                    <String fx:value="Flagstaff" />
-         			                    <String fx:value="Richmond" />
-         			                    <String fx:value="Lilydale" />
-         			                    <String fx:value="Epping" />
-         			                </FXCollections>
-                                 </items>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-      			            </ListView>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="150.0" prefWidth="237.0" spacing="5.0">
-                           <children>
-                              <Label prefHeight="15.0" prefWidth="152.0" text="TO:" />    
-                              <ListView id="to" fx:id="arriveId" prefHeight="152.0" prefWidth="164.0">
-                                 <items>
-                                 	<FXCollections fx:factory="observableArrayList">
-         			                    <String fx:value="Central" />
-         			                    <String fx:value="Flagstaff" />
-         			                    <String fx:value="Richmond" />
-         			                    <String fx:value="Lilydale" />
-         			                    <String fx:value="Epping" />
-         			                 </FXCollections>
-                                 </items>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-      			            </ListView>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="159.0" prefWidth="176.0" spacing="5.0">
-                           <children>
-                              <Label text="CARD ID" />   
-                              <ListView id="cardId" fx:id="cardId" prefHeight="156.0" prefWidth="103.0">
-      			            </ListView>
-                           </children>
-                        </VBox>  
-                        <VBox prefHeight="131.0" prefWidth="203.0" spacing="10.0">
-                           <children>
-                              <Label text="LENGTH PASS" />
-                              <ListView id="PassLength" fx:id="lengthId" prefHeight="78.0" prefWidth="137.0">
-                                 <items>
-   	                              <FXCollections fx:factory="observableArrayList">
-   				                    <String fx:value="2 Hour" />
-   				                    <String fx:value="All Day" />			                    
-   				                 </FXCollections>
-                                 </items>
-				              </ListView>
-                              <Label text="PASS TYPE" />  
-                              <ListView id="PassType" fx:id="zoneId" prefHeight="84.0" prefWidth="116.0">
-                                 <items>
-                                  	 <FXCollections fx:factory="observableArrayList">
-   				                    <String fx:value="Zone 1" />
-   				                    <String fx:value="Zone 1+2" />			                    
-   				                 </FXCollections>
-                                 </items>
-				             </ListView>  
-                           </children>
-                        </VBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="15.0" right="10.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="67.0" prefWidth="598.0" spacing="20.0">
-                     <children>
-                        <Label text="Date &amp; Time" />
-                        <DatePicker fx:id="dateId" prefHeight="23.0" prefWidth="173.0" promptText="Day:" />
-                        <TextField fx:id="timeId" prefHeight="23.0" prefWidth="108.0" promptText="Time: ex) 1400" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="112.0" prefWidth="598.0" spacing="20.0">
-                     <children>
-                        <Button fx:id="purchaseJourneyId" mnemonicParsing="false" onAction="#purchaseJourney" prefHeight="35.0" prefWidth="88.0" text="Add Journey" />
-                        <TextArea fx:id="output" editable="false" prefHeight="108.0" prefWidth="307.0" text="Add a pass and add journey..." wrapText="true" />
-                        <Button fx:id="purchasePassId" mnemonicParsing="false" onAction="#purchasePass" prefHeight="36.0" prefWidth="78.0" text="Buy Pass" />
-                     </children></HBox>
-               </children>
-            </VBox>
-         </children>
     </AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>

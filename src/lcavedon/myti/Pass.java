@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import lcavedon.myti.JConstants.OPTION;
-import lcavedon.myti.JConstants.PERIOD;
 import lcavedon.myti.JConstants.ZONE;
 
 /**
@@ -65,11 +64,11 @@ public class Pass {
 		return this.zone.equals(OPTION.HOUR_2) ? ZONE.Z1 : ZONE.Z2;
 	}
 	public String getLengthName() {
-		return this.length.equals(OPTION.HOUR_2) ? PERIOD.HOURS : PERIOD.ALL_DAY;
+		return this.length.equals(OPTION.HOUR_2) ? OPTION.HOUR_2 : OPTION.ALL_DAY;
 	}
 	
 	public String toString() {
-		String length_ = this.length.equals(OPTION.HOUR_2) ? PERIOD.HOURS : PERIOD.ALL_DAY;
+		String length_ = this.length.equals(OPTION.HOUR_2) ? OPTION.HOUR_2 : OPTION.ALL_DAY;
 		String zone_ = this.zone.equals(OPTION.HOUR_2) ? ZONE.Z1 : ZONE.Z2;		
 		
 		String content = "ID: "+ this.id +" "+ " ["+ length_+"] "	;

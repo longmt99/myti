@@ -21,10 +21,7 @@ public class JConstants {
 		public static final String YES = "YES";
 		public static final String NO = "NO";
 	}
-	public interface PERIOD {
-		public static final String HOURS = "2 Hours";
-		public static final String ALL_DAY = "All Day";
-	}
+	
 	public interface ZONE {
 		public static final String Z1 = "Zone 1";
 		public static final String Z2 = "Zone 1 and 2";

@@ -9,10 +9,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,17 +85,20 @@ public class MainController  extends Application{
 		Application.launch(args);
 	}
 
-	Stage stage = null;
 	@Override
 	public void start(Stage stage) throws IOException
-	{  this.stage = stage;
+	{ 
 		FXMLLoader loader = new FXMLLoader();
 		InputStream fxmlDocPath = this.getClass().getResourceAsStream("main.fxml");
 		SplitPane root = (SplitPane) loader.load(fxmlDocPath);
 		stage.setFullScreen(false);
 		stage.setResizable(false);
+		TravelControl control =  new TravelControl(this);
 		Scene scene = new Scene(root);
+		
 		stage.setScene(scene);
+		
+		
 		//stage.get
 		stage.setTitle("My Ticket A02");
 		stage.show();
@@ -110,13 +109,9 @@ public class MainController  extends Application{
 	@FXML
 	private void initialize() throws IOException, DataException {
 		//new TravelControl(this);
+		showTravelPassUIAction();
 		System.out.println("Init System Data MyTi GUI");
-		ObservableList<String> items =FXCollections.observableArrayList ();
-		List<User> users = new DataFactory(inputPath,outputPath).listUser();
-		for (User user : users) {
-			items.add(user.getId());
-		}
-		cardId.setItems(items);
+		
 		
 		// Create a collection of stations, priceList for the system
 		stationList = new DataFactory(inputPath,outputPath).listStation();
@@ -133,26 +128,7 @@ public class MainController  extends Application{
 		String now = Utils.toDateString(Utils.addHour(1, new Date()), JConstants.ddMMyyyyHHmm);
 		timeId.setText(now.substring(8));
 		*/
-		output.setText("Add a pass and add journey..." + "\nConfig Path \n   INPUT:    ["+ inputPath+ "] \n   OUTPUT: ["+outputPath+"]");
-		lengthId.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		        try {
-		        	if(newValue.equals(JConstants.PERIOD.ALL_DAY)){
-		        		timeId.setText("");
-		        		timeId.setDisable(true);
-		        	}else{
-		        		timeId.setPromptText("Time: ex) 1400");
-		        		timeId.setDisable(false);
-		        	}
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		    }
-		});
-		
+	
 	}
 
 	
@@ -242,10 +218,10 @@ public class MainController  extends Application{
 	private void saveAction(ActionEvent event) {
 		try{
 			new DataFactory(inputPath, outputPath).replateFile();
-			output.setText(Utils.showInformationDialog("Saved your data at output path: ["+ outputPath+"] \n Travel pass, Journey and User."));
+			Utils.showInformationDialog("Saved your data at output path: ["+ outputPath+"] \n Travel pass, Journey and User.");
 		} catch (Exception e) {
 			e.printStackTrace();
-			output.setText(Utils.showErrorDialog(e.getMessage()));
+			//output.setText(Utils.showErrorDialog(e.getMessage()));
 		}
 	}
 	   

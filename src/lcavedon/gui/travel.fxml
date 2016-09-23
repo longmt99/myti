@@ -7,16 +7,16 @@
 <?import javafx.scene.text.*?>
 <?import javafx.collections.*?>
 
-<fx:root fx:id="travelVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="600.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="travelVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="600.0" stylesheets="@../../../resources/main.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <VBox layoutY="-3.0" prefHeight="364.0" prefWidth="598.0">
                <children>
-                  <Label prefHeight="43.0" prefWidth="555.0" text="Select your information ticket">
+                  <Label fx:id="selectYourTicketLbl" prefHeight="43.0" prefWidth="555.0" styleClass="headerLbl" text="Select your information ticket">
                      <VBox.margin>
                         <Insets left="20.0" />
                      </VBox.margin>
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
                   <HBox prefHeight="171.0" prefWidth="598.0" spacing="10.0">

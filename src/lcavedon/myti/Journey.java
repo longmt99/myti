@@ -31,10 +31,13 @@ public class Journey {
 	}
 	
 	public String toString() {
-		String zone_ = this.pass.getZoneName();		
-		return "Journey ID: "+ this.id +" for ["+ zone_ +"]"+" starting at ["+ this.startTime+"] "   
-				+ "\nFrom station ["+this.departName+"] to [" + this.arriveName+"]"   
-		+ "\n in travel pass"+this.pass ;
+		String zone_ = this.pass.getZoneName();
+		String journeyDetails ="";
+		if(Utils.isNotEmpty(this.id)){
+			journeyDetails = "Journey ID: "+ this.id +" for ["+ zone_ +"]"+" starting at ["+ this.startTime+"] "   
+					+ "\nFrom station ["+this.departName+"] to [" + this.arriveName+"]";
+		}
+		return journeyDetails +"\nTravel pass"+this.pass ;
 	}
 	public Journey(User user) {
 		this.user =user;

@@ -1,5 +1,10 @@
 ##id, userId, length, zone, price,status,startTime,endTime
-#Thu Sep 22 17:14:18 KST 2016
+#Fri Sep 23 15:32:55 KST 2016
+lc_30=lc,2 Hour,Zone 1,3.5,charged,240920160000,
 lc_29=lc,All Day,Zone 1,6.9,updated,220920160000,
+tttsd_02=tttsd,2 Hour,Zone 1+2,5.0,charged,240920160000,
+tttsd_01=tttsd,2 Hour,Zone 1,3.5,charged,240920160000,
 lc2_11=lc2,2 Hour,Zone 1,1.75,charged,220920160000,
+test_01=test,2 Hour,Zone 1,3.5,charged,230920160000,
 tttt_01=tttt,2 Hour,Zone 1,1.75,charged,220920160000,
+tetdg_01=tetdg,2 Hour,Zone 1,1.75,charged,240920160000,
